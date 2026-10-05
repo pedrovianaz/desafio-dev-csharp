@@ -43,7 +43,27 @@ while (continuar)
             break;
 
         case "2":
-            Console.WriteLine("Em construção...");
+            Console.Write("Código do produto: ");
+            int codigo = int.Parse(Console.ReadLine()!);
+
+            Produto? produtoEncontrado = null;
+
+            foreach (Produto p in registro.Estoque)
+            {
+                if (p.CodigoProduto == codigo)
+                {
+                    produtoEncontrado = p;
+                    break;
+                }
+            }
+
+            if (produtoEncontrado is null)
+            {
+                Console.WriteLine("Produto não encontrado!");
+                break;
+            }
+
+            Console.WriteLine($"Produto encontrado: {produtoEncontrado.DescricaoProduto} (estoque atual: {produtoEncontrado.Estoque})");
             break;
 
         case "3":
