@@ -9,8 +9,23 @@ var opcoes = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
 // 3. Converter o texto em objetos
 RegistroVendas? registro = JsonSerializer.Deserialize<RegistroVendas>(json, opcoes);
 
-// 4. Mostrar cada venda
+// 4. Criar o dicionário que vai guardar o total de cada vendedor
+var comissoes = new Dictionary<string, decimal>();
 foreach (Venda venda in registro!.Vendas)
 {
-    Console.WriteLine($"{venda.Vendedor} - {venda.Valor}");
+    decimal comissao = CalculadoraComissao.Calcular(venda.Valor);
+    if (comissoes.ContainsKey(venda.Vendedor))
+    {
+        comissoes[venda.Vendedor] += comissao;
+    }
+    else
+    {
+        comissoes[venda.Vendedor] = comissao;
+    }
+}
+
+// 5. Mostrar o total de cada vendedor
+foreach (var item in comissoes)
+{
+    Console.WriteLine($"{item.Key}: {item.Value:C}");
 }
