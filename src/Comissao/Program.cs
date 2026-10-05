@@ -13,7 +13,7 @@ RegistroVendas? registro = JsonSerializer.Deserialize<RegistroVendas>(json, opco
 if (registro is null)
 {
     Console.WriteLine("Não foi possível ler as vendas do arquivo.");
-    return;
+return;
 }
 
 // 4. Criar o dicionário que vai guardar o total de cada vendedor

@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/Comissao/Comissao.csproj" />
+    <Project Path="src/Estoque/Estoque.csproj" />
   </Folder>
 </Solution>
