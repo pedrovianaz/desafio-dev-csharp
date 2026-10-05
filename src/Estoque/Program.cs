@@ -18,6 +18,8 @@ if (registro is null)
 
 // 4. Menu principal
 bool continuar = true;
+var histórico = new List<Movimentacao>();
+int proximoId = 1;
 
 while (continuar)
 {
