@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using System.Globalization;
+
 CultureInfo.CurrentCulture = new CultureInfo("pt-BR");
+
 // 1. Ler o arquivo inteiro como texto
 string caminho = Path.Combine(AppContext.BaseDirectory, "vendas.json");
 string json = File.ReadAllText(caminho);
@@ -13,7 +15,7 @@ RegistroVendas? registro = JsonSerializer.Deserialize<RegistroVendas>(json, opco
 if (registro is null)
 {
     Console.WriteLine("Não foi possível ler as vendas do arquivo.");
-return;
+    return;
 }
 
 // 4. Criar o dicionário que vai guardar o total de cada vendedor

@@ -8,11 +8,11 @@ public static class CalculadoraComissao
         }
         else if (valorVenda < 500)
         {
-            return (1m / 100)*valorVenda;
+            return (1m / 100) * valorVenda;
         }
         else
         {
-            return (5m / 100)*valorVenda;
+            return (5m / 100) * valorVenda;
         }
-    }   
+    }
 }

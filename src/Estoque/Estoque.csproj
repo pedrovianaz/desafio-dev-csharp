@@ -6,7 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-<ItemGroup>
+
+  <ItemGroup>
     <None Update="estoque.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
+
 </Project>

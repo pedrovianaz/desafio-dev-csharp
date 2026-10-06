@@ -1,6 +1,8 @@
 ﻿using System.Text.Json;
 using System.Globalization;
+
 CultureInfo.CurrentCulture = new CultureInfo("pt-BR");
+
 // 1. Ler o arquivo inteiro como texto
 string caminho = Path.Combine(AppContext.BaseDirectory, "estoque.json");
 string json = File.ReadAllText(caminho);
@@ -69,7 +71,7 @@ while (continuar)
 
             Console.WriteLine($"Produto encontrado: {produtoEncontrado.DescricaoProduto} (estoque atual: {produtoEncontrado.Estoque})");
 
-            // 1. - Tipo
+            // Tipo
             Console.Write("Tipo (1 - Entrada / 2 - Saída): ");
             string? opcaoTipo = Console.ReadLine();
 
@@ -89,20 +91,21 @@ while (continuar)
                 break;
             }
 
-            // 2. - Quantidade
+            // Quantidade
             Console.Write("Quantidade: ");
             if (!int.TryParse(Console.ReadLine(), out int quantidade) || quantidade <= 0)
             {
                 Console.WriteLine("Quantidade inválida! Digite um número maior que zero.");
                 break;
             }
+
             if (tipo == TipoMovimentacao.Saida && quantidade > produtoEncontrado.Estoque)
             {
                 Console.WriteLine($"Estoque insuficiente! Disponível: {produtoEncontrado.Estoque}");
                 break;
             }
 
-            // 3 - Descrição
+            // Descrição
             Console.Write("Descrição: ");
             string? descricao = Console.ReadLine();
 
@@ -112,7 +115,7 @@ while (continuar)
                 break;
             }
 
-            // 4 - Atualizar o estoque
+            // Atualizar o estoque
             if (tipo == TipoMovimentacao.Entrada)
             {
                 produtoEncontrado.Estoque += quantidade;
@@ -122,7 +125,7 @@ while (continuar)
                 produtoEncontrado.Estoque -= quantidade;
             }
 
-            // 5 - Registrar no histórico
+            // Registrar no histórico
             var movimentacao = new Movimentacao
             {
                 Id = proximoId,
@@ -136,7 +139,7 @@ while (continuar)
             historico.Add(movimentacao);
             proximoId++;
 
-            // 6 - Resultado
+            // Resultado
             Console.WriteLine();
             Console.WriteLine($"✅ Movimentação nº {movimentacao.Id} registrada!");
             Console.WriteLine($"Estoque final de {produtoEncontrado.DescricaoProduto}: {produtoEncontrado.Estoque}");
@@ -151,14 +154,14 @@ while (continuar)
             }
 
             Console.WriteLine();
-            Console.WriteLine("=====HISTÓRICO DE MOVIMENTAÇÕES=====");
+            Console.WriteLine("===== HISTÓRICO DE MOVIMENTAÇÕES =====");
 
             foreach (Movimentacao mov in historico)
             {
                 string tipoTexto = mov.Tipo == TipoMovimentacao.Entrada ? "Entrada" : "Saída";
                 Console.WriteLine($"Nº {mov.Id} | {mov.Data:dd/MM/yyyy HH:mm} | Produto {mov.CodigoProduto} | {tipoTexto} | Qtd: {mov.Quantidade} | {mov.Descricao}");
             }
-            
+
             break;
 
         case "0":
