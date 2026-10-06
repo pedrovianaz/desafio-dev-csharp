@@ -108,7 +108,7 @@ while (continuar)
 
             if (string.IsNullOrWhiteSpace(descricao))
             {
-                Console.WriteLine("A descrição é obrigatoria!");
+                Console.WriteLine("A descrição é obrigatória!");
                 break;
             }
 
@@ -144,7 +144,21 @@ while (continuar)
             break;
 
         case "3":
-            Console.WriteLine("Em construção...");
+            if (historico.Count == 0)
+            {
+                Console.WriteLine("Nenhuma movimentação registrada ainda.");
+                break;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("=====HISTÓRICO DE MOVIMENTAÇÕES=====");
+
+            foreach (Movimentacao mov in historico)
+            {
+                string tipoTexto = mov.Tipo == TipoMovimentacao.Entrada ? "Entrada" : "Saída";
+                Console.WriteLine($"Nº {mov.Id} | {mov.Data:dd/MM/yyyy HH:mm} | Produto {mov.CodigoProduto} | {tipoTexto} | Qtd: {mov.Quantidade} | {mov.Descricao}");
+            }
+            
             break;
 
         case "0":
