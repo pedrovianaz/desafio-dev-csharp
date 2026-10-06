@@ -2,5 +2,6 @@
   <Folder Name="/src/">
     <Project Path="src/Comissao/Comissao.csproj" />
     <Project Path="src/Estoque/Estoque.csproj" />
+    <Project Path="src/Juros/Juros.csproj" />
   </Folder>
 </Solution>
