@@ -18,7 +18,7 @@ if (registro is null)
     return;
 }
 
-// 4. Criar o dicionário que vai guardar o total de cada vendedor
+// 4. Dicionário que vai guardar o total de cada vendedor
 var comissoes = new Dictionary<string, decimal>();
 foreach (Venda venda in registro.Vendas)
 {
