@@ -18,7 +18,7 @@ if (registro is null)
 
 // 4. Menu principal
 bool continuar = true;
-var histórico = new List<Movimentacao>();
+var historico = new List<Movimentacao>();
 int proximoId = 1;
 
 while (continuar)
@@ -98,7 +98,6 @@ while (continuar)
             {
                 produtoEncontrado.Estoque += quantidade;
             }
-
             else
             {
                 produtoEncontrado.Estoque -= quantidade;
@@ -115,7 +114,7 @@ while (continuar)
                 Data = DateTime.Now
             };
 
-            histórico.Add(movimentacao);
+            historico.Add(movimentacao);
             proximoId++;
 
             // 6 - Resultado
