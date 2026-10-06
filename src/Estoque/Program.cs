@@ -44,7 +44,11 @@ while (continuar)
 
         case "2":
             Console.Write("Código do produto: ");
-            int codigo = int.Parse(Console.ReadLine()!);
+            if (!int.TryParse(Console.ReadLine(), out int codigo))
+            {
+                Console.WriteLine("Código inválido! Digite apenas números.");
+                break;
+            }
 
             Produto? produtoEncontrado = null;
 
@@ -87,11 +91,26 @@ while (continuar)
 
             // 2. - Quantidade
             Console.Write("Quantidade: ");
-            int quantidade = int.Parse(Console.ReadLine()!);
+            if (!int.TryParse(Console.ReadLine(), out int quantidade) || quantidade <= 0)
+            {
+                Console.WriteLine("Quantidade inválida! Digite um número maior que zero.");
+                break;
+            }
+            if (tipo == TipoMovimentacao.Saida && quantidade > produtoEncontrado.Estoque)
+            {
+                Console.WriteLine($"Estoque insuficiente! Disponível: {produtoEncontrado.Estoque}");
+                break;
+            }
 
             // 3 - Descrição
             Console.Write("Descrição: ");
-            string descricao = Console.ReadLine() ?? "";
+            string? descricao = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(descricao))
+            {
+                Console.WriteLine("A descrição é obrigatoria!");
+                break;
+            }
 
             // 4 - Atualizar o estoque
             if (tipo == TipoMovimentacao.Entrada)
