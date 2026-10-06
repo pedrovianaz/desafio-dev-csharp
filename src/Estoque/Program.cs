@@ -64,6 +64,65 @@ while (continuar)
             }
 
             Console.WriteLine($"Produto encontrado: {produtoEncontrado.DescricaoProduto} (estoque atual: {produtoEncontrado.Estoque})");
+
+            // 1. - Tipo
+            Console.Write("Tipo (1 - Entrada / 2 - Saída): ");
+            string? opcaoTipo = Console.ReadLine();
+
+            TipoMovimentacao tipo;
+
+            if (opcaoTipo == "1")
+            {
+                tipo = TipoMovimentacao.Entrada;
+            }
+            else if (opcaoTipo == "2")
+            {
+                tipo = TipoMovimentacao.Saida;
+            }
+            else
+            {
+                Console.WriteLine("Tipo inválido!");
+                break;
+            }
+
+            // 2. - Quantidade
+            Console.Write("Quantidade: ");
+            int quantidade = int.Parse(Console.ReadLine()!);
+
+            // 3 - Descrição
+            Console.Write("Descrição: ");
+            string descricao = Console.ReadLine() ?? "";
+
+            // 4 - Atualizar o estoque
+            if (tipo == TipoMovimentacao.Entrada)
+            {
+                produtoEncontrado.Estoque += quantidade;
+            }
+
+            else
+            {
+                produtoEncontrado.Estoque -= quantidade;
+            }
+
+            // 5 - Registrar no histórico
+            var movimentacao = new Movimentacao
+            {
+                Id = proximoId,
+                CodigoProduto = produtoEncontrado.CodigoProduto,
+                Tipo = tipo,
+                Quantidade = quantidade,
+                Descricao = descricao,
+                Data = DateTime.Now
+            };
+
+            histórico.Add(movimentacao);
+            proximoId++;
+
+            // 6 - Resultado
+            Console.WriteLine();
+            Console.WriteLine($"✅ Movimentação nº {movimentacao.Id} registrada!");
+            Console.WriteLine($"Estoque final de {produtoEncontrado.DescricaoProduto}: {produtoEncontrado.Estoque}");
+
             break;
 
         case "3":
